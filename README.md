@@ -23,7 +23,7 @@
 - Python - List Comprehension, Functions, I/O
 - Exercise 3: List Comprehension, Functions 
 
-## 03.11.2022
+### 03.11.2022
 
 - Python - Exception Handling, Python Packages
 - Types of DL tasks, classification
