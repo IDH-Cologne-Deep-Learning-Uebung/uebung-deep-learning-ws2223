@@ -9,5 +9,5 @@ c = [i for i in y if i == True]
 print(c)
 d = [i for i in y if isinstance(i, str)]
 print(d)
-e = [[i] for i in x if i%2 != 0]
+e = [list(range(1,i)) for i in x if i%2 != 0]
 print(e)
