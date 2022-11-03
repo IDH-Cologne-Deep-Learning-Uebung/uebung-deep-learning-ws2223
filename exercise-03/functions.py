@@ -16,12 +16,14 @@ def func2(*kwargs):
   else :
     return len(kwargs)
 
-def func3(*kwargs):
-  if kwargs[0] == "a" and kwargs[1] == "b":
-    return True
+def func3(**kwargs):
+  if 'a' in kwargs.keys() and 'b' in kwargs.keys():
+    return func1(kwargs['a'],kwargs['b'])
+  else:
+    return func2(*list(kwargs.keys()))
 
 print(func2(3,3))
-# print(func3(a = 1, b = 2))
+print(func3(aa = 1, b = 2, c=2, d=3))
 
 func1(1,2)
 func1("Welt", "Hallo")
