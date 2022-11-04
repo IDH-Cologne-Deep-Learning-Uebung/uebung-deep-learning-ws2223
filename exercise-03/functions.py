@@ -9,6 +9,20 @@ def func1(a, b):
     return None
   return type(a)
 
+def func2(*args):
+  if (len(args) == 2):
+    return func1(args[0],args[1])
+  elif (len(args) < 2):
+    return str(len(args))
+  else:
+    return len(args)
+
+def func3(**kwargs):
+  if ["a", "b"] in kwargs.keys():
+    return func1(kwargs.get("a"),kwargs.get("b"))
+  else:
+    return func2(kwargs.keys())
+
 func1(1,2)
 func1("Welt", "Hallo")
 func1(None, None)
