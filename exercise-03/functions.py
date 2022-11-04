@@ -9,6 +9,19 @@ def func1(a, b):
     return None
   return type(a)
 
+def func2(*args):
+  a = int(len(args))
+  if a<2:
+    print("Es waren",a,"Variablen")
+  elif a==2:
+    return func1(args)
+  else:
+    return a
+  
+
+
+
+
 func1(1,2)
 func1("Welt", "Hallo")
 func1(None, None)
