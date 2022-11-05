@@ -9,6 +9,7 @@ def func1(a, b):
     return None
   return type(a)
 
+<<<<<<< HEAD
 print(func1(1,2))
 print(func1("Welt", "Hallo"))
 print(func1(None, None))
@@ -37,3 +38,10 @@ def func3(**kwargs):
     return func2(kwargs)
 
 print(func3(a=1, b=2))
+=======
+func1(1,2)
+func1("Welt", "Hallo")
+func1(None, None)
+func1(11, "Freunde")
+func1(5.4, 3.6)
+>>>>>>> master

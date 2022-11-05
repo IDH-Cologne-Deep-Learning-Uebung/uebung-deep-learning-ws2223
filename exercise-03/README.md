@@ -1,10 +1,22 @@
+<<<<<<< HEAD
 # Exercise 3: List Comprehension, Functions, IO
+=======
+# Exercise 3: List Comprehension, Functions
+>>>>>>> master
 
 This is the third exercise, and it verifies that you're able to apply list comprehension, implement a function and read in from/write out to files.
 
 ## Step 1
 If not already done clone this repository to your local computer. On the command line, you would use the following command: `git clone https://github.com/IDH-Cologne-Deep-Learning-Uebung/uebung-deep-learning-ws2223`.
+<<<<<<< HEAD
 If already done, pull the latest version from our repository and merge it to your branch. This can be achieved by using `git merge master` or `git rebase master`. Note that you have to be in your own branch when doing that.
+=======
+If already done, pull the latest version from our repository and merge it to your branch. This can be achieved by using 
+- `git checkout master`
+- `git pull`
+- `git checkout EIGENER_BRANCH`
+- `git merge master`.
+>>>>>>> master
 
 
 ## Step 2: List Comprehension

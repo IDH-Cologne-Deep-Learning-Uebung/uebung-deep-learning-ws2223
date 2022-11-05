@@ -18,4 +18,12 @@
 - Python - Syntax, Dynamic Typing, Data Types, Standard Libs
 - Exercise 2: Getting Started With Git And Python
 
+<<<<<<< HEAD
+=======
+### 27.10.2022
+
+- Python - List Comprehension, Functions, I/O
+- Exercise 3: List Comprehension, Functions 
+
+>>>>>>> master
 
