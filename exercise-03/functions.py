@@ -13,6 +13,7 @@ func1(1,2)
 func1("Welt", "Hallo")
 func1(None, None)
 func1(11, "Freunde")
+<<<<<<< HEAD
 func1(5.4, 3.6)
 
 def func2(*args):
@@ -29,3 +30,6 @@ def func3(**kwargs):
       return func1(**kwargs)
     else:
       return func2(**kwargs)
+=======
+func1(5.4, 3.6)
+>>>>>>> master

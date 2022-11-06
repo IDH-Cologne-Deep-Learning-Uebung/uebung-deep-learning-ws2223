@@ -13,6 +13,7 @@
 - Exercise 1: Setting Up
 
 ### 20.10.2022
+<<<<<<< HEAD
 
 - Git Recap
 - Python - Syntax, Dynamic Typing, Data Types, Standard Libs
@@ -23,4 +24,20 @@
 - Python - List Comprehension, Functions, I/O
 - Exercise 3: List Comprehension, Functions 
 
+=======
+>>>>>>> master
 
+- Git Recap
+- Python - Syntax, Dynamic Typing, Data Types, Standard Libs
+- Exercise 2: Getting Started With Git And Python
+
+### 27.10.2022
+
+- Python - List Comprehension, Functions, I/O
+- Exercise 3: List Comprehension, Functions 
+
+### 03.11.2022
+
+- Python - Exception Handling, Python Packages
+- Types of DL tasks, classification
+- Exercise 4: I/O, Exception Handling, Python Packages
