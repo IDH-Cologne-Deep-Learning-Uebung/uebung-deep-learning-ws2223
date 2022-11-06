@@ -14,3 +14,22 @@ func1("Welt", "Hallo")
 func1(None, None)
 func1(11, "Freunde")
 func1(5.4, 3.6)
+
+def func2(*args):
+    if len(args) < 2:
+        x = str(len(args))
+        return x
+    if len(args) == 2:
+        func1(args)
+        return 
+    if len(args) > 2:
+        return len(args)
+
+def func3(**kargs):
+    if "a" and  "b" in kargs:
+        func1(a, b)
+        return
+    if "a" and "b" not in kargs:
+        func2(kwargs)
+        return
+
