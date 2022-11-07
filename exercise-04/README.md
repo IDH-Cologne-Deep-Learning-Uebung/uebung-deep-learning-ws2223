@@ -5,7 +5,7 @@ As always, the deadline is the beginning of the next session.
 ## Step 1
 If not already done clone this repository to your local computer. On the command line, you would use the following command: `git clone https://github.com/IDH-Cologne-Deep-Learning-Uebung/uebung-deep-learning-ws2223`.
 If already done, pull the latest version from our repository and merge it to your branch. This can be achieved by using 
-- `git checkout master`
+- `git checkout master` 
 - `git pull`
 - `git checkout EIGENER_BRANCH`
 - `git merge master`.
