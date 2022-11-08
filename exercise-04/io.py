@@ -1,5 +1,9 @@
-data = open("C:\Users\jan\Documents\uebung-deep-learning-ws2223\exercise-04\wiki.txt")
+data = open("wiki.txt",mode ="r",encoding="UTF-8")
 
+A = []
 for line in data.readlines ():
-    print(line)
+    if len(line)<30:   
+        A.append(line)
+    else:
+        None
 data.close()
