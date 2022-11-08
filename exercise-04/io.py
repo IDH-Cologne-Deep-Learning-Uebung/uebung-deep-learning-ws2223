@@ -1,9 +1,6 @@
 data = open("wiki.txt",mode ="r",encoding="UTF-8")
 
 A = []
-for line in data.readlines ():
-    if len(line)<30:   
-        A.append(line)
-    else:
-        None
+[A.append(line) for line in data if len(line)<30]
+
 data.close()
