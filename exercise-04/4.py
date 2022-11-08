@@ -7,7 +7,8 @@ for outerlist in l1:
   print(i, end=" ")
   for j in range(20):
     try:
-      print(outerlist[j])
+      print(outerlist[j], end=" ")
     except Exception:
-      print(0)
+      print(0, end=" ")
   i = i + 1
+  print("")
