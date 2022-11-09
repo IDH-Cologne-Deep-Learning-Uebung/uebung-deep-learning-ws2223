@@ -1,4 +1,5 @@
-# This program takes console input through piping. 
+# This program takes console input through piping.
+# Use cat input.txt | python io.py
 import sys
 
 current_sentence = ""
@@ -24,6 +25,12 @@ for line in sys.stdin:
     else: 
         string_input += line[:sentence_end_position]
 
-print(out_short)
-print(out_articles)
-print(out_april)
+# print(out_short)
+# print(out_articles)
+# print(out_april)
+with open('short.txt', 'w') as f:
+    f.write(out_short)
+with open('articles.txt', 'w') as f:
+    f.write(out_articles)
+with open('april.txt', 'w') as f:
+    f.write(out_april)

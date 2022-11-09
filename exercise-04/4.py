@@ -5,7 +5,11 @@ l1 = [[int(random.normalvariate(50,20)) for x in range(random.randint(5,20))] fo
 i = 0
 for outerlist in l1:
   print(i, end=" ")
-  for element in outerlist:
+  for j in range(20):
+    try:
+        element = outerlist[j]
+    except:
+        element = 0
     print(element, end=" ")
   print()
   i = i + 1
