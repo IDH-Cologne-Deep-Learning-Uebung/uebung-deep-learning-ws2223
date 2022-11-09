@@ -7,5 +7,13 @@ for outerlist in l1:
   print(i, end=" ")
   for element in outerlist:
     print(element, end=" ")
+  x = 0
+  while x < 20:
+    try:
+      outerlist[x]
+    except:
+      print("00", end=" ")
+    finally:
+      x = x+1
   print()
   i = i + 1
