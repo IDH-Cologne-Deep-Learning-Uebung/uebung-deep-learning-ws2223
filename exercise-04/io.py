@@ -6,9 +6,9 @@ kurz.close()
 
 
 articles=("Der","Die","Das")
-Artikel = open("articles.txt",mode ="w")
-[Artikel.write(line) for line in data if line.startswith(articles) and  line.startswith(" ",3,4)]
-Artikel.close()
+artikel = open("articles.txt",mode ="w")
+[artikel.write(line) for line in data if line.startswith(articles) and  line.startswith(" ",3,4)]
+artikel.close()
 
 
 april = open("april.txt",mode = "w")
