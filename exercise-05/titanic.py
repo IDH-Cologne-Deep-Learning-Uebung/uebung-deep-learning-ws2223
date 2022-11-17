@@ -59,7 +59,3 @@ y_pred = clf.predict(testing_data)
 #print(f"log: {LRG}")
 
 # 4. Lastly, calculate precision/recall/f-score on the test data using the appropriate functions from `scikit-learn`.
-train_rec = recall_score(testing_data, y_pred)*100
-train_prec = precision_score(testing_data, y_pred)*100
-train_fscore = f1_score(testing_data, y_pred)*100
-print("Recall: ", train_rec, "\nPrecision: ", train_prec, "\nFScore: ", train_fscore)
