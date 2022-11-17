@@ -1,13 +1,17 @@
 import pandas as pd
 
 # read the data from a CSV file (included in the repository)
-df = pd.read_csv("data/train.csv")
+df = pd.read_csv("train.csv")
+
 
 
 # ## Step 3
 # 1. Remove the columns "Name" and "PassengerId" (because we know they are irrelevant for our problem).
 # 2. Convert all non-numeric columns into numeric ones. The non-numeric columns are "Sex", "Cabin", "Ticket" and "Embarked".
 # 3. Remove all rows that contain missing values
+df=df.filter(items=["survived", "sex", "age", ])
+print(df.columns)
+
 
 
 # ## Step 4
