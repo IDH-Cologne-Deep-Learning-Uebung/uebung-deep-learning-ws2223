@@ -4,7 +4,7 @@ wiki=[line for line in file]
 file.close()
 #Sort
 short=[line.removesuffix("\n") for line in wiki if len(line)<30]
-article=[line.removesuffix("\n") for line in wiki if line.startswith("Der") or line.startswith("Die") or line.startswith("Das")]
+article=[line.removesuffix("\n") for line in wiki if line.startswith("Der ") or line.startswith("Die ") or line.startswith("Das ")]
 april=[line.removesuffix("\n") for line in wiki if line.__contains__("April")]
 #Write
 shorttxt=open("exercise-04/short.txt",mode="w",errors="ignore")
