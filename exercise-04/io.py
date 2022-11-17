@@ -10,7 +10,7 @@ fs.writelines(line for line in fo if len(line)< 30)
 fs.close()
 
 #The file articles.txt contains all sentences that start with an article, added blank space so we don't get words like Dieser oder Deren
-far.writelines(line for line in fo if line.startswith("Die " or "Das " or "Der "))
+far.writelines(line for line in fo  if line.startswith("Der ") or line.startswith("Die ") or line.startswith("Das "))
 far.close()
 
 #The file april.txt contains all sentences that contain the string "April"
