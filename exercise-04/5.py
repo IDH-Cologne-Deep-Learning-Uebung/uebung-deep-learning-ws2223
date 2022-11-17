@@ -18,3 +18,4 @@ vectorizer = CountVectorizer(max_features=5000)
 vectorizer.fit(lines)
 vectors = vectorizer.transform(lines)
 print(vectors[1])
+ 
