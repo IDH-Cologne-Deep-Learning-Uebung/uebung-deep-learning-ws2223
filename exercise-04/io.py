@@ -1,13 +1,30 @@
-with open("exercise-04\wiki.txt", "r") as f:
-    with open("exercise-04\short.txt", "w") as f1:
-        with open("exercise-04\ articles.txt", "w") as f2:
-            with open("exercise-04\ april.txt", "w") as f3:
-                for line in f:
-                    if len(line) <= 50: 
-                        f1.write(line)
-                    if line.startswith("Die") or line.startswith("Der") or line.startswith("Das"):
-                        f2.write(line)
-                    #if "April" in f.read():
-                     #   f3.write(line) funktioniert irgendwie nicht
-                    else: 
-                        print(None)
+# Because we will need this code a few times, 
+# we define a function for it
+def ListToFile(List, Filename):
+  # open file for writing
+  file = open(Filename, "w")
+  
+  # iterate over list
+  for Line in List:
+    # write list into file
+    file.write(Line)
+
+  # close file
+  file.close()
+
+# open file for reading
+file = open("wiki.txt")
+
+# get a list of all sentences
+sentences = file.readlines()
+
+# close file
+file.close()
+
+# call function for different subsets of sentences
+ListToFile([x for x in sentences if len(x) < 30], 
+  "short.txt")
+ListToFile([x for x in sentences if x.startswith("Der") or x.startswith("Die") or x.startswith("Das")], 
+  "articles.txt")
+ListToFile([x for x in sentences if "April" in x], 
+  "april.txt")
