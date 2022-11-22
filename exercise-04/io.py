@@ -1,12 +1,31 @@
-with open("wiki.txt") as f:
-    txt = f.readlines()
-    line = [line.replace("\n", "") for line in txt]
+# Because we will need this code a few times, 
+# we define a function for it
+def ListToFile(List, Filename):
+    # open file for writing
+    file = open(Filename, "w")
 
-with open("short.txt", "w") as f:
-    [f.write(line + "\n") for line in line if len(line) < 30]
+    # iterate over list
+    for Line in List:
+        # write list into file
+        file.write(Line)
 
-with open("articles.txt", "w") as f:
-    [f.write(line + "\n") for line in line if line.startswith("Der") or line.startswith("Die") or line.startswith("Das")]
+    # close file
+    file.close()
 
-with open("april.txt", "w") as f:
-    [f.write(line + "\n") for line in line if "April" in line]
+
+# open file for reading
+file = open("wiki.txt")
+
+# get a list of all sentences
+sentences = file.readlines()
+
+# close file
+file.close()
+
+# call function for different subsets of sentences
+ListToFile([x for x in sentences if len(x) < 30],
+           "short.txt")
+ListToFile([x for x in sentences if x.startswith("Der") or x.startswith("Die") or x.startswith("Das")],
+           "articles.txt")
+ListToFile([x for x in sentences if "April" in x],
+           "april.txt")
