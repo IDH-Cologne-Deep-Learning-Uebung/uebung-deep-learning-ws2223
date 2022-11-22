@@ -2,6 +2,22 @@ import pandas as pd
 
 # read the data from a CSV file (included in the repository)
 df = pd.read_csv("data/train.csv")
+df.drop (['name', 'PassengerId'], axis = 1) #This deletes the unwanted coloumns
+
+#Let´s convert non numerics into numerics
+#Step 1: making sure there´s actual numbers in the columns:
+df['Sex'] = df['Sex'].replace(['male', 'female'], '1', '0')
+df['Embarked'] = df['Embarked'].replace(['Q', 'C','S'], '0','1','2')
+df['Cabin'] = df['Cabin'].replace(['B', 'C','D','E','F','G'], '0','1','2','3','4','5')
+
+df.dropna #Deletes rows with null values in them
+
+#And now let´s convert those Strings of numbers into numeric data types: 
+df["Sex"] = pd.to_numeric(df["Sex"])
+df["Embarked"] = pd.to_numeric(df["Embarked"])
+df["Cabin"] = pd.to_numeric(df["Cabin"])
+
+#Alright, Data´s All prepared, let´s move on to step 4
 
 
 # ## Step 3
