@@ -1,4 +1,9 @@
 import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import f1_score
 
 # read the data from a CSV file (included in the repository)
 df = pd.read_csv("data/train.csv")
@@ -18,6 +23,25 @@ df["Embarked"] = pd.to_numeric(df["Embarked"])
 df["Cabin"] = pd.to_numeric(df["Cabin"])
 
 #Alright, Data´s All prepared, let´s move on to step 4
+#First, let´s define the "target" label, in our case wether or not the person survived:
+x_data = df[['PcClass','Sex','Age','SibSp','Parch','Ticket','Fare','Cabin','Embarked']]
+y_data = df['Survived']
+
+#Now let´s split up the training and test sets
+df_train = df.sample(frac=0.8, random_state=1)
+df_test = df.drop(df_train.index)
+
+#fitting the data to the linear regressor....
+regressor = LinearRegression()
+regressor.fit(x_data, y_data)
+
+y_pred = regressor.predict(y_data) #the actual regressor command
+
+#and finally calculating precision/recall and f-score:
+recall_score(y_data, y_pred, *['PcClass','Sex','Age','SibSp','Parch','Ticket','Ticket','Fare','Cabin','Embarked'])
+precision_score(y_data, y_pred, *['PcClass','Sex','Age','SibSp','Parch','Ticket','Ticket','Fare','Cabin','Embarked'])
+f1_score(y_data, y_pred, *['PcClass','Sex','Age','SibSp','Parch','Ticket','Ticket','Fare','Cabin','Embarked'])
+
 
 
 # ## Step 3
