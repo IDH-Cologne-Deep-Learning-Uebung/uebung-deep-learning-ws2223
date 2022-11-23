@@ -1,30 +1,17 @@
-# Because we will need this code a few times, 
-# we define a function for it
-def ListToFile(List, Filename):
-  # open file for writing
-  file = open(Filename, "w")
-  
-  # iterate over list
-  for Line in List:
-    # write list into file
-    file.write(Line)
+Text = open("wiki.txt", mode = 'r', encoding = "utf-8")
 
-  # close file
-  file.close()
+Kurz = open("short.txt", mode = 'w', encoding = "utf-8")
+[Kurz.write(Zeile) for Zeile in Text if len(Zeile) < 30]
+Kurz.close
 
-# open file for reading
-file = open("wiki.txt")
+Artikel = open("articles.txt", mode = 'w', encoding = "utf-8")
+Anfang = ["Der", "Die", "Das"]
+[Artikel.write(Zeile) for Zeile in Text if len(Zeile) < 30]
+#[Artikel.write(Zeile) for Zeile in Text if Zeile.startswith(Anfang)]
+Artikel.close
 
-# get a list of all sentences
-sentences = file.readlines()
+April = open("april.txt", mode = 'w', encoding = "utf-8")
+[April.write(Zeile) for Zeile in Text if "April" in Zeile]
+April.close
 
-# close file
-file.close()
-
-# call function for different subsets of sentences
-ListToFile([x for x in sentences if len(x) < 30], 
-  "short.txt")
-ListToFile([x for x in sentences if x.startswith("Der") or x.startswith("Die") or x.startswith("Das")], 
-  "articles.txt")
-ListToFile([x for x in sentences if "April" in x], 
-  "april.txt")
+Text.close
