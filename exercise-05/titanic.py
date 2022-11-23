@@ -3,7 +3,18 @@ import pandas as pd
 # read the data from a CSV file (included in the repository)
 df = pd.read_csv("data/train.csv")
 
+df = df.drop(columns=["Name", "PassengerId"])
+df = df.dropna()
+print(df.columns)
+# print(df["Sex"].unique())
+df["Sex"] = df["Sex"].map({'male': 0, 'female': 1})
+unique_cabin = df["Cabin"].unique()
 
+cabin_numeric = dict(zip(unique_cabin, range(len(unique_cabin))))
+df["Cabin"] = df["Cabin"].map(cabin_numeric)
+
+ticket_numeric = dict(zip(df["Ticket"].unique(), range(len(df["Ticket"].unique()))))
+print()
 # ## Step 3
 # 1. Remove the columns "Name" and "PassengerId" (because we know they are irrelevant for our problem).
 # 2. Convert all non-numeric columns into numeric ones. The non-numeric columns are "Sex", "Cabin", "Ticket" and "Embarked".
