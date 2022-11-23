@@ -1,5 +1,3 @@
-import tokenize
-
 try:
     short = open("short.txt", "x")
     artikel = open("artikel.txt", "x")
