@@ -44,7 +44,7 @@ y = df.iloc[:, 0] # selects entries from row "Survived"
 # print(y.head())
 
 # 2. Secondly, we need to split training and test data. This can be done with the function [`sklearn.model_selection.train_test_split()`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split) from the `scikit-learn` library.
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=None, train_size=None, random_state=42, shuffle=True, stratify=None)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=42, train_size=None, random_state=None, shuffle=True, stratify=None)
 
 # 3. initialize a LogisticRegression object with a `liblinear` solver, and fit it to the training data.
 clf = LogisticRegression(random_state=None, solver='liblinear', multi_class='ovr', verbose=0)
