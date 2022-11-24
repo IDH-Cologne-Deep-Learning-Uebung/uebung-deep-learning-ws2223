@@ -1,15 +1,15 @@
 import pandas as pd
 import numpy as np
-import sklearn
+import sklearn.model_selection import train_test_split
 
 # read the data from a CSV file (included in the repository)
 df = pd.read_csv("data/train.csv")
 df.pop("Name")
 df.pop("PassengerId")
-df.dropna(how="any")
+df = df.dropna(how="any")
 #df[["Sex","Cabin","Ticket","Embarked"]] = df[["Sex","Cabin","Ticket","Embarked"]].astype(np.uint64, copy=False)
 #print(df["Embarked"])
-
+x_train, x_test, y_train, y_test = train_test_split(x,y,random_state=0,test_size=0.1)
 print(df.head())
 #for row in df:
 #    for cel in row:
