@@ -13,6 +13,7 @@ Verlag ist Paris on Paper.
 Werke * Für Staat und Volk.
 Ihre Geschichte und Kultur.
 Es ist eine reale Sache…“.
+<<<<<<< HEAD
 Es gibt zwei Ausbildungswege.
 Kirche mit Diakonen.
 In der Zeitung Das Inland.
@@ -23,13 +24,24 @@ Reise durch das Kirchenjahr.
 Ihre Eltern leben dort.
 Die Juden im Mittelalter.
 Ihre Fläche beträgt 19,3 km².
+=======
+Kirche mit Diakonen.
+In der Zeitung Das Inland.
+Akademie Verlag 1961.
+Reise durch das Kirchenjahr.
+Ihre Eltern leben dort.
+Die Juden im Mittelalter.
+>>>>>>> master
 Universität Köln, 1961.
 Grundlagen und Klinik.
 Lingen Verlag, Köln, 1989.
 Ist meist ein Fehlpass.
 Unter Alfons III.
 Eine Figur stirbt.
+<<<<<<< HEAD
 Seine Tochter Gundalena (geb.
+=======
+>>>>>>> master
 Band 1: Die 1950er Jahre.
 Sie beträgt heute 14–15 %.
 Er wurde 1981 pensioniert.
