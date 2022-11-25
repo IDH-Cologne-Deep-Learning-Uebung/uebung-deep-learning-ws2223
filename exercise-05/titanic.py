@@ -48,23 +48,3 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 print("precision: " + str(precision_score(y_test, y_pred)))
 print("recall: " + str(recall_score(y_test, y_pred)))
 print("f1: " + str(f1_score(y_test, y_pred)))
-Footer
-© 2022
-GitHub, Inc.
-Footer
-navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact
-GitHub
-Pricing
-API
-Training
-Blog
-About
-uebung - deep - learning - ws2223 / titanic_ref_solution.py
-at
-master · IDH - Cologne - Deep - Learning - Uebung / uebung - deep - learning - ws2223
