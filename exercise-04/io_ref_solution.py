@@ -40,6 +40,7 @@ sentences = file.readlines()
 file.close()
 
 # call function for different subsets of sentences
+<<<<<<< HEAD:exercise-04/io.py
 ListToFile([x for x in sentences if len(x) < 30], 
   "short.txt")
 ListToFile([x for x in sentences if x.startswith("Der") or x.startswith("Die") or x.startswith("Das")], 
@@ -47,3 +48,11 @@ ListToFile([x for x in sentences if x.startswith("Der") or x.startswith("Die") o
 ListToFile([x for x in sentences if "April" in x], 
   "april.txt")
 >>>>>>> master
+=======
+ListToFile([x for x in sentences if len(x) < 30],
+           "short_ref_solution.txt")
+ListToFile([x for x in sentences if x.startswith("Der") or x.startswith("Die") or x.startswith("Das")],
+           "articles_ref_solution.txt")
+ListToFile([x for x in sentences if "April" in x],
+           "april_ref_solution.txt")
+>>>>>>> master:exercise-04/io_ref_solution.py
