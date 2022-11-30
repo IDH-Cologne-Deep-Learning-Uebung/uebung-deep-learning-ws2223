@@ -22,9 +22,9 @@ sentences = file.readlines()
 file.close()
 
 # call function for different subsets of sentences
-ListToFile([x for x in sentences if len(x) < 30], 
-  "short.txt")
-ListToFile([x for x in sentences if x.startswith("Der") or x.startswith("Die") or x.startswith("Das")], 
-  "articles.txt")
-ListToFile([x for x in sentences if "April" in x], 
-  "april.txt")
+ListToFile([x for x in sentences if len(x) < 30],
+           "short_ref_solution.txt")
+ListToFile([x for x in sentences if x.startswith("Der") or x.startswith("Die") or x.startswith("Das")],
+           "articles_ref_solution.txt")
+ListToFile([x for x in sentences if "April" in x],
+           "april_ref_solution.txt")
