@@ -1,4 +1,6 @@
 import pandas as pd
+from keras import Sequential, Input, Model
+from keras.layers import Dense
 
 # read the data from a CSV file (included in the repository)
 df = pd.read_csv("data/train.csv")
@@ -23,22 +25,19 @@ df["Embarked"] = df["Embarked"].map(
 )
 df = df.dropna()
 
-# ## Step 3
-# 1. Remove the columns "Name" and "PassengerId" (because we know they are irrelevant for our problem).
-# 2. Convert all non-numeric columns into numeric ones. The non-numeric columns are "Sex", "Cabin", "Ticket" and "Embarked".
-# 3. Remove all rows that contain missing values
-from sklearn.model_selection import train_test_split
-from keras import Sequential, layers
-from keras.activations import softmax
-Y_col = 'Survived'
-X_cols = df.loc[:, df.columns != Y_col].columns
-X_Train, X_test, y_train, y_test = train_test_split(
-    df[X_cols], df[Y_col], 
-    test_size=0.20, random_state=66
-    )
+y = df["Survived"]
+x = df.drop("Survived", 1)
 
-inputs = Input((len(X_cols),))
-hidden = layers.Dense(10, activation=softmax)
-outputs = layers.Dense(activation=softmanx)(hidden)
-model = Sequential(inputs, outputs)
-print(model.summary())
+inputs = Input(shape=(len(df),))
+x = Dense(10, activation='softmax')(inputs)
+outputs = Dense(10, activation='softmax')(x)
+
+model = Model(inputs, outputs)
+# model.summary()
+
+from sklearn.model_selection import train_test_split
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=0, test_size=0.1)
+
+model.compile(optimizer="Adam", loss="mse", metrics=["mae", "acc"])
+model.fit(x_train, y_train)
