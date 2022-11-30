@@ -1,5 +1,4 @@
 import math
-import numpy as np
 import pandas as pd
 from tensorflow import keras as ke
 from keras.layers import Dense, Input
@@ -7,6 +6,7 @@ from keras.activations import softmax as sf
 from sklearn.model_selection import train_test_split as split
 
 df = pd.read_csv("data/train.csv")
+print("DataFrame loaded.")
 
 df = df.drop(labels=["Name", "PassengerId"], axis=1)
 print("DataFrame filtered")
@@ -89,8 +89,10 @@ print("Model compiled.")
 model.fit(x_train, y_train)
 print("Model trained.")
 
-y_predict = [int(i) for i in model.predict(x_test)]
-y_test = [int(i) for i in y_test]
+y_predict = model.predict(x_test)
+# The reason why this doesn't work is because the predict method keeps returning
+# a very strange list of lists that are almost all the same, which doesn't make the
+# slightest bit of sense.
 
 tp, tn, fp, fn = 0, 0, 0, 0
 for i in range(0, len(y_predict)):
