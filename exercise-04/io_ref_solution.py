@@ -1,30 +1,14 @@
-# Because we will need this code a few times, 
-# we define a function for it
-def ListToFile(List, Filename):
-  # open file for writing
-  file = open(Filename, "w")
-  
-  # iterate over list
-  for Line in List:
-    # write list into file
-    file.write(Line)
+import random
 
-  # close file
-  file.close()
+l1 = [[int(random.normalvariate(50,20)) for x in range(random.randint(5,20))] for x in range(10)]
 
-# open file for reading
-file = open("wiki.txt")
-
-# get a list of all sentences
-sentences = file.readlines()
-
-# close file
-file.close()
-
-# call function for different subsets of sentences
-ListToFile([x for x in sentences if len(x) < 30],
-           "short_ref_solution.txt")
-ListToFile([x for x in sentences if x.startswith("Der") or x.startswith("Die") or x.startswith("Das")],
-           "articles_ref_solution.txt")
-ListToFile([x for x in sentences if "April" in x],
-           "april_ref_solution.txt")
+i = 0
+for outerlist in l1:
+  print(i, end=" ")
+  for i in range(20):
+    try:
+      print(outerlist[i], end=" ")
+    except IndexError:
+      print(0, end=" ")
+  print()
+  i = i + 1
