@@ -41,4 +41,14 @@
 - Loss Function
 - Gradient Descent
 - Scikit-Learn
+<<<<<<< HEAD
 - Exercise 5: Logistic Regression
+=======
+- Exercise 5: Logistic Regression
+
+### 24.11.2022
+
+- Feed-Forward Neural Networks
+- Keras
+- Exercise 6: Feed-Forward Neural Networks
+>>>>>>> master
