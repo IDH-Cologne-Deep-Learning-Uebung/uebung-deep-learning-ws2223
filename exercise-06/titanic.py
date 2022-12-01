@@ -26,7 +26,7 @@ df = make_numeric(df)
 
 # 3. Remove all rows that contain missing values
 df = df.dropna()
-
+print(df)
 # ## Step 4
 # 1. As a next step, we need to split the input features from the training labels. This can be done easily with `pandas`.
 y = df["Survived"]
@@ -38,6 +38,7 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=0, test_s
 
 # 3. Finally, initialize a LogisticRegression object with a `liblinear` solver, and fit it to the training data.
 model = keras.Sequential()
+model.add(Input)
 model.add(layers.Dense(10, activation="softmax", name="hiddenLayer"))
 model.compile(loss="mean_squared_error", optimizer="sgd", metrics=["accuracy"])
 model.fit(x_train, y_train)
