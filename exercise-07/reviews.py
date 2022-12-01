@@ -7,6 +7,7 @@ import tensorflow as tf
 from tensorflow import keras
 from keras import layers
 from keras.models import Sequential
+from keras import regularizers
 
 # Step 2: Download data
 def get_labels_and_texts(file, n=12000):
@@ -22,11 +23,8 @@ def get_labels_and_texts(file, n=12000):
           return np.array(labels), texts
     return np.array(labels), texts
 
-# print(get_labels_and_texts("data/train.ft.txt.bz2", 4)[1])
-
+# get_labels_and_texts("data/train.ft.txt.bz2", 50)
 # Step 3: Represent text
-# vok wert: 5000
-
 vectorizer = CountVectorizer(max_features = 2, lowercase=True) # Parameter vocabulary = 5000 spuckt Fehlermeldung aus...warum?
 
 y_train, X_train = get_labels_and_texts("data/train.ft.txt.bz2")
@@ -42,17 +40,19 @@ test_vec = vectorizer.transform(X_test)
 model = Sequential()
 model.add(layers.Input(shape=(2,)))
 
-model.add(layers.Dense(10, activation="softmax"))
-model.add(layers.Dense(20, activation="softmax"))
+# model.add(layers.Dense(20, activation="relu", activity_regularizer=regularizers.L2(0.2)))
+model.add(layers.Dense(16, activation="relu"))
+model.add(layers.Dense(16, activation="relu"))
 model.add(layers.Dense(1, activation="softmax"))
+model.add(layers.Dropout(0.5))
 model.summary()
 
-model.compile(loss="binary_crossentropy", optimizer="sgd", metrics=["accuracy"])
-model.fit(train_vec, y_train, epochs=20, batch_size=25)
+model.compile(loss="mse", optimizer="adam", metrics=["accuracy"])
+model.fit(train_vec, y_train, epochs=100, batch_size=256)
 
-def evaluate(m):
+def evaluate(model):
     print("[INFO] evaluating network...")
-    y_pred = m.predict(train_vec)
+    y_pred = model.predict(train_vec, batch_size=256)
     print(y_test)
     print(y_pred)
     print("precision: "+ str(precision_score(y_test, y_pred)))
@@ -60,3 +60,4 @@ def evaluate(m):
     print("f1: "+ str(f1_score(y_test, y_pred)))
 
 evaluate(model)
+
