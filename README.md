@@ -28,3 +28,17 @@
 - Python - Exception Handling, Python Packages
 - Types of DL tasks, classification
 - Exercise 4: I/O, Exception Handling, Python Packages
+
+### 17.11.2022
+
+- Linear and Logistic Regression
+- Loss Function
+- Gradient Descent
+- Scikit-Learn
+- Exercise 5: Logistic Regression
+
+### 24.11.2022
+
+- Feed-Forward Neural Networks
+- Keras
+- Exercise 6: Feed-Forward Neural Networks
