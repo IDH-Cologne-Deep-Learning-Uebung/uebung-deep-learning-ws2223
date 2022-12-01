@@ -45,6 +45,7 @@ regressor.fit(x_data, y_data)
 
 #instead: let´s do this with Keras: 
 model = keras.Sequential()
+model.add (input(shape = 3,))
 model . add ( layers . Dense (5 , activation =" sigmoid "))
 model . add ( layers . Dense (1 , activation =" softmax "))
 
