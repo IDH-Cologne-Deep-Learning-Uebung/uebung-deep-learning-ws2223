@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
 from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras import metrics
+
+from keras import layers
+from keras import metrics
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import recall_score
 from sklearn.metrics import precision_score
