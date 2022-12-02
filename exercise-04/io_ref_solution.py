@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-
-with open("wiki.txt") as f:
-    txt = f.readlines()
-    sentences = [sentence.replace("\n", "") for sentence in txt]
-
-with open("short.txt", "w") as f:
-    [f.write(sentence + "\n") for sentence in sentences if len(sentence) < 30]
-
-with open("articles.txt", "w") as f:
-    [f.write(sentence + "\n") for sentence in sentences if sentence.startswith("Der") or sentence.startswith("Die") or sentence.startswith("Das")]
-
-with open("april.txt", "w") as f:
-    [f.write(sentence + "\n") for sentence in sentences if "April" in sentence]
-=======
 # Because we will need this code a few times, 
 # we define a function for it
 def ListToFile(List, Filename):
@@ -43,4 +28,3 @@ ListToFile([x for x in sentences if x.startswith("Der") or x.startswith("Die") o
   "articles.txt")
 ListToFile([x for x in sentences if "April" in x], 
   "april.txt")
->>>>>>> master
