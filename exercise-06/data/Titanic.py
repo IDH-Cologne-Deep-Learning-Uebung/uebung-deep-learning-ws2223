@@ -51,8 +51,8 @@ model.compile(loss="mean_squared_error", optimizer="sgd", metrics=["accuracy"])
 model.fit(X_train, y_train)
 
 #2.
-model.add(layers.Input(shape=(20, activation=="sigmoid")))
-model.add(layers.Input(shape=(10, activation=="relu")))
+model.add(layers.Input(shape=(20, activation == "sigmoid")))
+model.add(layers.Input(shape=(10, activation == "relu")))
 
 #3.
 y_predict = [int(i) for i in model.predict(X_test)]
