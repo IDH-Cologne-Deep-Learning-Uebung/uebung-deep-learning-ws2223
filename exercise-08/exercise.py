@@ -6,7 +6,7 @@ from tensorflow.python.keras import models, layers
 from keras.layers import Embedding
 from tensorflow import keras
 from keras.preprocessing.text import Tokenizer, text_to_word_sequence
-from keras.utils import pad_sequences
+from keras.preprocessing.sequence import pad_sequences
 from keras import regularizers
 
 
@@ -25,14 +25,21 @@ def get_labels_and_texts(file, n=1000): # change n
 
 
 train_labels, train_texts = get_labels_and_texts('../exercise-07/data/train.ft.txt.bz2')
+y_test, test_texts = get_labels_and_texts('../exercise-07/data/train.ft.txt.bz2')
 
 # Preprocessing
 tokenizer = Tokenizer() # initialize the Tokenizer object
 tokenizer.fit_on_texts(train_texts) #each word is assigned a unique number & every word is now represented by a number
 vocab_size = len(tokenizer.word_index) + 1 # create vocab index
-sequences = tokenizer.texts_to_sequences(train_texts) # convert each sentence into a sequence of numbers 
-MAX_LENGTH = max(len(train_ex) for train_ex in sequences)
-train_texts = pad_sequences(sequences, maxlen = MAX_LENGTH, padding = "post") # data
+
+train_sequences = tokenizer.texts_to_sequences(train_texts) # convert each sentence into a sequence of numbers 
+MAX_LENGTH = max(len(sentence) for sentence in train_sequences) # 200
+
+train_texts = pad_sequences(train_sequences, maxlen = MAX_LENGTH, padding = "post") # numpy
+
+test_sequences = tokenizer.texts_to_sequences(test_texts)
+x_test = pad_sequences(train_sequences, maxlen = MAX_LENGTH, padding = "post") # data
+
 
 # word_index = tokenizer.word_index
 # print('###### Found %s unique tokens. ######' % len(word_index))
@@ -66,20 +73,42 @@ embedding_layer = Embedding(
 
 print(embedding_matrix.shape)
 
+# BUILD MODEL
 ffnn = models.Sequential()
-ffnn.add(layers.Input(shape=(MAX_LENGTH))) 
-# ffnn.add(layers.Embedding(vocab_size, EMBEDDING_DIM, weights = [embedding_matrix], input_length=MAX_LENGTH))
+ffnn.add(layers.Input(shape=(MAX_LENGTH,))) 
 ffnn.add(embedding_layer)
 ffnn.add(layers.Flatten())
-ffnn.add(layers.Dense(100, activation="sigmoid"))
+ffnn.add(layers.Dense(100, activation="relu"))
 ffnn.add(layers.Dropout(0.5))
-ffnn.add(layers.Dense(50, activation="sigmoid"))
+ffnn.add(layers.Dense(50, activation="relu"))
 ffnn.add(layers.Dropout(0.5))
 ffnn.add(layers.Dense(1, activation="sigmoid"))
 
 ffnn.summary()
 
+# Shuffle the data
+seed = 1337
+rng = np.random.RandomState(seed)
+rng.shuffle(train_texts)
+rng = np.random.RandomState(seed)
+rng.shuffle(train_labels)
+
+# Extract a training & validation split
+validation_split = 0.2
+num_validation_samples = int(validation_split * len(train_texts))
+x_train = train_texts[:-num_validation_samples]
+x_val = train_texts[-num_validation_samples:]
+
+y_train = train_labels[:-num_validation_samples]
+y_val = train_labels[-num_validation_samples:]
+
+
 ffnn.compile(loss="binary_crossentropy", optimizer="sgd",
   metrics=["accuracy"])
 
-ffnn.fit(train_texts, train_labels, epochs=10, batch_size=10, verbose=1)
+print("Fit model on training data")
+
+ffnn.fit(train_texts, train_labels, epochs=10, batch_size=10, verbose=1, validation_data=(x_val, y_val),)
+
+results = ffnn.evaluate(x_test, y_test, batch_size=128)
+print("test loss, test acc:", results)
