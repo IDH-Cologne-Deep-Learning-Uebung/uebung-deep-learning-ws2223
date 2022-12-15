@@ -282,3 +282,5 @@ TSWLatexianTemp*
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
+exercise-07/data/test.ft.txt.bz2
+exercise-07/data/train.ft.txt.bz2
