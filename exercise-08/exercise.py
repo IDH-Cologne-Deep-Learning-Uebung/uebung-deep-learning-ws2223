@@ -43,6 +43,7 @@ print("Network created")
 
 ffnn.summary()
 
-ffnn.compile(loss="binary_crossentropy", optimizer="sgd", metrics=["accuracy"])
+ffnn.compile(loss="binary_crossentropy", optimizer="sgd",
+  metrics=["accuracy"])
 
 ffnn.fit(train_texts, train_labels, epochs=10, batch_size=10, verbose=1)
