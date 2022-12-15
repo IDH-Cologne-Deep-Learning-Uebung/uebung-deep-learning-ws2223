@@ -22,7 +22,7 @@ def get_labels_and_texts(file, n=12000):
     return np.array(labels), texts
 
 #Now, let´s read that thing and define it´s conent as df
-df_train = get_labels_and_texts(train.ft.txt.bz2, n= 10)
+df_train = get_labels_and_texts(data/train.ft.txt.bz2, n= 10)
 
 Vectorizer = CountVectorizer(max_features=1000)#This turns the corpus into a bag of words
 Lowercase= True #makes everything lowercaste so I don´t have to worry about case sensitivity
@@ -56,4 +56,5 @@ model . fit ( df_train , df_test , epochs =100 , batch_size =5)
 m = df.keras.metrics.Accuracy(df_test)
 m.update_state([df_test])
 m.result().numpy()
-#this is a test comment to see if I finally got my git together
+#if this is not fixed by the time you´re looking at it I straight up forgot because I now have to
+#do exercise 8
