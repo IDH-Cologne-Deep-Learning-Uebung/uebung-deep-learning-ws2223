@@ -56,3 +56,4 @@ model . fit ( df_train , df_test , epochs =100 , batch_size =5)
 m = df.keras.metrics.Accuracy(df_test)
 m.update_state([df_test])
 m.result().numpy()
+#this is a test comment to see if I finally got my git together
