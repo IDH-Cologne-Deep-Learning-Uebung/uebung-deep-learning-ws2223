@@ -1,11 +1,12 @@
 import bz2
 
 import numpy as np
+import json
 
 from tensorflow.python.keras import models, layers
-from tensorflow.keras.preprocessing.text import Tokenizer, text_to_word_sequence
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras import regularizers
+from keras.preprocessing.text import Tokenizer, text_to_word_sequence as tf
+from keras.preprocessing.sequence import pad_sequences
+from keras import regularizers
 
 
 def get_labels_and_texts(file, n=10000):
@@ -24,9 +25,34 @@ def get_labels_and_texts(file, n=10000):
 
 train_labels, train_texts = get_labels_and_texts('data/train.ft.txt.bz2')
 
+#Let´s set up our Tokenizer
+class DataTokenizer(keras.preprocessing.text.tokenizers.Tokenizer):
+  def tokenize (self, inputs):
+    return tf.strings.reduce_join(inputs, seperator = "", axis= -1)
+
+
+Tokenizer = DataTokenizer()
+#alright, let´s tokenize
+Tokenizer.tokenize('data/train.ft.txt.bz2')
+
+#the tokenizer returns a json object, so let´s convert that into an array we can use
+#first, we need to convert it from a json library to a python library:
+JsonTokens = json.loads(Tokenizer)
+
+#Then we need to turn that library into an array
+FinalTokens = JsonTokens.items()
+elemen = list(FinalTokens)
+con_arr = np.array(elemen)
+#and now we have an array
+
+#one last thing: need to pad the sequence length so they´re all equally long:
+sequence = FinalTokens
+tf.keras.preprocessing.sequence.pad_sequences(
+  sequence, maxlen = None, dtype='int32', padding = 'pre', truncating = 'pre', value = 0.0
+)
 
 ffnn = models.Sequential()
-ffnn.add(layers.Input(shape=(MAX_LENGTH)))
+ffnn.add(layers.Input(shape=('maxlen')))
 ffnn.add(layers.Dense(100, activation="sigmoid"))
 ffnn.add(layers.Dropout(0.5))
 ffnn.add(layers.Dense(50, activation="sigmoid"))
