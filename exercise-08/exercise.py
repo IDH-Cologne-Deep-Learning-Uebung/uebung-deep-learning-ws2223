@@ -1,7 +1,9 @@
 import bz2
 
 import numpy as np
+from keras.layers import Embedding
 from keras.utils import pad_sequences
+from tensorflow import keras
 from tensorflow.python.keras import models, layers
 from keras.preprocessing.text import Tokenizer, text_to_word_sequence
 from keras import regularizers
@@ -33,11 +35,28 @@ MAX_LENGTH = max(len(train_ex) for train_ex in train_texts)
 train_texts = pad_sequences(train_texts, maxlen=MAX_LENGTH, padding="post")
 
 # pre-trained Embeddings:
-# embedding_layer = Embedding(
-# vocab_size,
-# EMBEDDING_DIM,
-# embeddings_initializer=keras.initializers.Constant(embedding_matrix),
-# trainable=false)
+embeddings_dict = {}  # This dictionary will contain all the words available in the glove embedding file.
+with open("data/glove.6B/glove.6B.100d.txt", 'r', encoding="utf-8") as f:
+  for line in f:
+      values = line.split()  # split lines at white space
+      word = values[0]  # word equals first element
+      vector = np.asarray(values[1:], "float32")  # rest of line convert to numpy arr = vector of word position
+      embeddings_dict[word] = vector  # update dict with word + vector
+
+print('##### GloVe data loaded ######')
+
+EMBEDDING_DIM = embeddings_dict.get('a').shape[0]
+
+embedding_matrix = np.zeros((vocab_size, EMBEDDING_DIM))
+for word, i in tokenizer.word_index.items():
+    embedding_vect = embeddings_dict.get(word)
+    if embedding_vect is not None:
+        embedding_matrix[i] = embedding_vect
+
+embedding_layer = Embedding(vocab_size, EMBEDDING_DIM, embeddings_initializer=keras.initializers.Constant(embedding_matrix), trainable=False)
+
+print(embedding_matrix.shape)
+
 
 ffnn = models.Sequential()
 ffnn.add(layers.Input(shape=MAX_LENGTH))
