@@ -33,8 +33,11 @@ MAX_LENGTH = max(len(train_ex) for train_ex in train_texts)
 train_texts = pad_sequences(train_texts, maxlen=MAX_LENGTH, padding="post")
 
 # pre-trained Embeddings:
-# embeddings_initializer=keras.initializers.Constant(embedding_matrix)
-# trainable=false
+# embedding_layer = Embedding(
+# vocab_size,
+# EMBEDDING_DIM,
+# embeddings_initializer=keras.initializers.Constant(embedding_matrix),
+# trainable=false)
 
 ffnn = models.Sequential()
 ffnn.add(layers.Input(shape=MAX_LENGTH))
