@@ -9,7 +9,7 @@ from keras.preprocessing.text import Tokenizer, text_to_word_sequence
 from keras import regularizers
 
 
-def get_labels_and_texts(file, n=10000):
+def get_labels_and_texts(file, n=1000):
     labels = []
     texts = []
     i = 0
@@ -24,15 +24,20 @@ def get_labels_and_texts(file, n=10000):
 
 
 train_labels, train_texts = get_labels_and_texts('data/train.ft.txt.bz2')
+y_test, test_texts = get_labels_and_texts('data/train.ft.txt.bz2')
 
+# Preprocessing
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(train_texts)
 vocab_size = len(tokenizer.word_index) + 1
-train_texts = tokenizer.texts_to_sequences(train_texts)
+train_sequences = tokenizer.texts_to_sequences(train_texts)
 
-MAX_LENGTH = max(len(train_ex) for train_ex in train_texts)
+MAX_LENGTH = max(len(train_ex) for train_ex in train_sequences)
 
-train_texts = pad_sequences(train_texts, maxlen=MAX_LENGTH, padding="post")
+train_texts = pad_sequences(train_sequences, maxlen=MAX_LENGTH, padding="post")
+
+test_sequences = tokenizer.texts_to_sequences(test_texts)
+x_test = pad_sequences(train_sequences, maxlen=MAX_LENGTH, padding="post")
 
 # pre-trained Embeddings:
 embeddings_dict = {}  # This dictionary will contain all the words available in the glove embedding file.
@@ -70,6 +75,25 @@ ffnn.add(layers.Dense(1, activation="sigmoid"))
 
 ffnn.summary()
 
+# Shuffle the data
+seed = 1337
+rng = np.random.RandomState(seed)
+rng.shuffle(train_texts)
+rng = np.random.RandomState(seed)
+rng.shuffle(train_labels)
+
+# Extract a training & validation split
+validation_split = 0.2
+num_validation_samples = int(validation_split * len(train_texts))
+x_train = train_texts[:-num_validation_samples]
+x_val = train_texts[-num_validation_samples:]
+y_train = train_labels[:-num_validation_samples]
+y_val = train_labels[-num_validation_samples:]
+
+
 ffnn.compile(loss="binary_crossentropy", optimizer="sgd", metrics=["accuracy"])
 
 ffnn.fit(train_texts, train_labels, epochs=10, batch_size=10, verbose=1)
+
+results = ffnn.evaluate(x_test, y_test, batch_size=128)
+print("test loss, test acc:", results)
