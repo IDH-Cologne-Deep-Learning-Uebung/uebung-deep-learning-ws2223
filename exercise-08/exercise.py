@@ -5,7 +5,7 @@ import json
 
 from tensorflow.python.keras import models, layers
 from keras.preprocessing.text import Tokenizer, text_to_word_sequence as tf
-from keras.preprocessing.sequence import pad_sequences as ps
+from keras.utils import pad_sequences 
 from keras import regularizers as re
 
 
@@ -26,7 +26,7 @@ def get_labels_and_texts(file, n=10000):
 train_labels, train_texts = get_labels_and_texts('data/train.ft.txt.bz2')
 
 #Let´s set up our Tokenizer
-class DataTokenizer(tf.tokenizers.Tokenizer):
+class DataTokenizer(Tokenizer):
   def tokenize (self, inputs):
     return tf.strings.reduce_join(inputs, seperator = "", axis= -1)
 
@@ -47,7 +47,7 @@ con_arr = np.array(elemen)
 
 #one last thing: need to pad the sequence length so they´re all equally long:
 sequence = FinalTokens
-tf.keras.preprocessing.sequence.pad_sequences(
+tf.keras.utils.pad_sequences(
   sequence, maxlen = None, dtype='int32', padding = 'pre', truncating = 'pre', value = 0.0
 )
 
