@@ -5,8 +5,8 @@ import json
 
 from tensorflow.python.keras import models, layers
 from keras.preprocessing.text import Tokenizer, text_to_word_sequence as tf
-from keras.preprocessing.sequence import pad_sequences
-from keras import regularizers
+from keras.preprocessing.sequence import pad_sequences as ps
+from keras import regularizers as re
 
 
 def get_labels_and_texts(file, n=10000):
