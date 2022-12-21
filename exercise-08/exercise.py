@@ -26,7 +26,7 @@ def get_labels_and_texts(file, n=10000):
 train_labels, train_texts = get_labels_and_texts('data/train.ft.txt.bz2')
 
 #Let´s set up our Tokenizer
-class DataTokenizer(keras.preprocessing.text.tokenizers.Tokenizer):
+class DataTokenizer(tf.tokenizers.Tokenizer):
   def tokenize (self, inputs):
     return tf.strings.reduce_join(inputs, seperator = "", axis= -1)
 
@@ -53,6 +53,8 @@ tf.keras.preprocessing.sequence.pad_sequences(
 
 ffnn = models.Sequential()
 ffnn.add(layers.Input(shape=('maxlen')))
+ffnn.add(layers.Embedding(1000, 200, input_length= 'maxlen'))
+ffnn.add(layers.flatten())
 ffnn.add(layers.Dense(100, activation="sigmoid"))
 ffnn.add(layers.Dropout(0.5))
 ffnn.add(layers.Dense(50, activation="sigmoid"))
