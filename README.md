@@ -51,10 +51,14 @@
 - Drop Out 
 - Exercise 7: Text Representation and Combatting Overfitting
 
-### 01.12.2022
+### 08.12.2022
 
 - Input Representation
 - Word Embeddings
 - Embeddings with Keras
 - Exercise 8: Embeddings
 
+### 15.12.2022
+
+- What we have learned so far...
+- Exercise 8 continued
