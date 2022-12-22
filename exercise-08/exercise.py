@@ -26,34 +26,20 @@ def get_labels_and_texts(file, n=10000):
 train_labels, train_texts = get_labels_and_texts('data/train.ft.txt.bz2')
 
 #Let´s set up our Tokenizer
-class DataTokenizer(Tokenizer):
-  def tokenize (self, inputs):
-    return tf.strings.reduce_join(inputs, seperator = "", axis= -1)
+tokenizer = Tokenizer()
+tokenizer.fit_on_texts(train_texts)
+vocab_size = len (tokenizer.word_index) + 1
+train_texts = tokenizer.texts_to_sequences (train_texts)
 
-
-Tokenizer = DataTokenizer()
-#alright, let´s tokenize
-Tokenizer.tokenize('data/train.ft.txt.bz2')
-
-#the tokenizer returns a json object, so let´s convert that into an array we can use
-#first, we need to convert it from a json library to a python library:
-JsonTokens = json.loads(Tokenizer)
-
-#Then we need to turn that library into an array
-FinalTokens = JsonTokens.items()
-elemen = list(FinalTokens)
-con_arr = np.array(elemen)
-#and now we have an array
+MAX_LENGTH = max(len(train_ex) for train_ex in train_texts)
 
 #one last thing: need to pad the sequence length so they´re all equally long:
-sequence = FinalTokens
-tf.keras.utils.pad_sequences(
-  sequence, maxlen = None, dtype='int32', padding = 'pre', truncating = 'pre', value = 0.0
-)
+train_texts = pad_sequences(train_texts, maxlen = MAX_LENGTH, padding = 'post')
+
 
 ffnn = models.Sequential()
 ffnn.add(layers.Input(shape=('maxlen')))
-ffnn.add(layers.Embedding(1000, 200, input_length= 'maxlen'))
+ffnn.add(layers.Embedding(vocab_size, 200, input_length= MAX_LENGTH))
 ffnn.add(layers.flatten())
 ffnn.add(layers.Dense(100, activation="sigmoid"))
 ffnn.add(layers.Dropout(0.5))
