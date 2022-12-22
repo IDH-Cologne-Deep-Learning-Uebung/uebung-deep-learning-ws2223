@@ -36,3 +36,29 @@
 - Gradient Descent
 - Scikit-Learn
 - Exercise 5: Logistic Regression
+
+### 24.11.2022
+
+- Feed-Forward Neural Networks
+- Keras
+- Exercise 6: Feed-Forward Neural Networks
+
+### 01.12.2022
+
+- Bag of Words
+- Overfitting
+- Regularization
+- Drop Out 
+- Exercise 7: Text Representation and Combatting Overfitting
+
+### 08.12.2022
+
+- Input Representation
+- Word Embeddings
+- Embeddings with Keras
+- Exercise 8: Embeddings
+
+### 15.12.2022
+
+- What we have learned so far...
+- Exercise 8 continued
