@@ -1,11 +1,12 @@
 import bz2
 
 import numpy as np
-
 from tensorflow.python.keras import models, layers
-from tensorflow.keras.preprocessing.text import Tokenizer, text_to_word_sequence
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras import regularizers
+from keras.layers import Embedding
+from tensorflow import keras
+from keras.preprocessing.text import Tokenizer, text_to_word_sequence
+from keras.utils import pad_sequences
+from keras import regularizers
 
 
 def get_labels_and_texts(file, n=10000):
@@ -24,9 +25,45 @@ def get_labels_and_texts(file, n=10000):
 
 train_labels, train_texts = get_labels_and_texts('data/train.ft.txt.bz2')
 
+#Step 3: Preprocessing
+
+tokenizer = Tokenizer() #keras Tokenizer
+tokenizer.fit_on_texts(train_texts)
+vocab_size = len(tokenizer.word_index) + 1 #vocabular erstellen, +1 da wir mit 0 starten
+train_texts = tokenizer.texts_to_sequences(train_texts)
+
+MAX_LENGTH = max(len(train_ex) for train_ex in train_texts)
+
+train_texts = pad_sequences(train_texts, maxlen=MAX_LENGTH, padding="post") #padding auf fixed length von dem längsten Eintrag in den daten
+
+# Step 4: pre-trained Embeddings:
+#embeddings_dict = {}  # This dictionary will contain all the words available in the glove embedding file.
+#with open("data/glove.6B/glove.6B.100d.txt", 'r', encoding="utf-8") as f:
+#  for line in f:
+#      values = line.split()  # split lines at white space
+#      word = values[0]  # word equals first element
+#      vector = np.asarray(values[1:], "float32")  # rest of line convert to numpy arr = vector of word position
+#      embeddings_dict[word] = vector  # update dict with word + vector
+#
+#print('##### GloVe data loaded ######')
+#
+#EMBEDDING_DIM = embeddings_dict.get('a').shape[0]
+#
+#embedding_matrix = np.zeros((vocab_size, EMBEDDING_DIM))
+#for word, i in tokenizer.word_index.items():
+#    embedding_vect = embeddings_dict.get(word)
+#    if embedding_vect is not None:
+#        embedding_matrix[i] = embedding_vect
+#
+#embedding_layer = Embedding(vocab_size, EMBEDDING_DIM, embeddings_initializer=keras.initializers.Constant(embedding_matrix), trainable=False)
+#
+#print(embedding_matrix.shape)
+
 
 ffnn = models.Sequential()
 ffnn.add(layers.Input(shape=(MAX_LENGTH)))
+ffnn.add(layers.Embedding(vocab_size, 200, input_length=MAX_LENGTH)) #Embedding layer
+ffnn.add(layers.Flatten())                                          #flattening after the embedding
 ffnn.add(layers.Dense(100, activation="sigmoid"))
 ffnn.add(layers.Dropout(0.5))
 ffnn.add(layers.Dense(50, activation="sigmoid"))
@@ -39,5 +76,3 @@ ffnn.compile(loss="binary_crossentropy", optimizer="sgd",
   metrics=["accuracy"])
 
 ffnn.fit(train_texts, train_labels, epochs=10, batch_size=10, verbose=1)
-
-
