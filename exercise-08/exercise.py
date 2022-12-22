@@ -1,12 +1,12 @@
 import bz2
 
 import numpy as np
-import json
 
 from tensorflow.python.keras import models, layers
 from keras.preprocessing.text import Tokenizer, text_to_word_sequence as tf
 from keras.utils import pad_sequences 
 from keras import regularizers as re
+from keras.layers import InputLayer
 
 
 def get_labels_and_texts(file, n=10000):
@@ -38,9 +38,9 @@ train_texts = pad_sequences(train_texts, maxlen = MAX_LENGTH, padding = 'post')
 
 
 ffnn = models.Sequential()
-ffnn.add(layers.Input(shape=('maxlen')))
+ffnn.add(layers.InputLayer(input_shape=(MAX_LENGTH)))
 ffnn.add(layers.Embedding(vocab_size, 200, input_length= MAX_LENGTH))
-ffnn.add(layers.flatten())
+ffnn.add(layers.Flatten())
 ffnn.add(layers.Dense(100, activation="sigmoid"))
 ffnn.add(layers.Dropout(0.5))
 ffnn.add(layers.Dense(50, activation="sigmoid"))
